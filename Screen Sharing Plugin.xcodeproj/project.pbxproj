@@ -196,6 +196,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = "Screen Sharing Plugin";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Debug;
@@ -211,6 +212,7 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Bundles";
 				PRODUCT_NAME = "Screen Sharing Plugin";
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				WRAPPER_EXTENSION = bundle;
 			};
 			name = Release;

@@ -18,7 +18,7 @@
 {
 	static SPSScreenSharingPlugin* plugin = nil;
 	if ( plugin == nil )
-		[[[SPSScreenSharingPlugin alloc] init] autorelease];
+		plugin = [[SPSScreenSharingPlugin alloc] init];
 	return plugin;
 }
 
@@ -44,18 +44,22 @@
 	// Add some cool items
 	newItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Disable Control" action:NULL keyEquivalent:@""];
 	[newItem setTag:DisableControlTag];
-	[newItem setTarget:self];
+	[newItem setTarget:[SPSScreenSharingPlugin sharedInstance]];
 	[newItem setAction:@selector(toggleControlSetting:)];
 	[newMenu addItem:newItem];
 	[newItem release];
 
 }
 
+- (void) dealloc
+{
+	[disableControlSetting release];
+	[super dealloc];
+}
+
 - (BOOL)validateMenuItem:(NSMenuItem *)item
 {
 	NSInteger tag = [item tag];
-	NSLog(@"validateMenuItem()");
-	
 	if (tag == DisableControlTag) {
 		[item setState:([disableControlSetting boolValue]) ? NSOnState : NSOffState];
 		return YES;
@@ -66,9 +70,9 @@
 
 - (void)toggleControlSetting:(id)sender
 {
-	NSLog(@"toggleControlSetting()");
-	
 	disableControlSetting = ([disableControlSetting boolValue]) ? [NSNumber numberWithBool:NO] : [NSNumber numberWithBool:YES];
+	// FIXME: figure how to call NSView > RFBImageView setControl:shared:
+	// [[NSApp mainWindow] setControl:[disableControlSetting boolValue] shared:[disableControlSetting boolValue]];
 }
 
 @end
