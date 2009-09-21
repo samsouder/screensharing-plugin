@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Screen Sharing Plugin' target in the 'Screen Sharing Plugin' project.
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
