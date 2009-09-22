@@ -48,7 +48,6 @@
 	[newItem setAction:@selector(toggleControlSetting:)];
 	[newMenu addItem:newItem];
 	[newItem release];
-
 }
 
 - (void) dealloc
@@ -71,8 +70,9 @@
 - (void)toggleControlSetting:(id)sender
 {
 	disableControlSetting = ([disableControlSetting boolValue]) ? [NSNumber numberWithBool:NO] : [NSNumber numberWithBool:YES];
-	// FIXME: figure how to call NSView > RFBImageView setControl:shared:
-	// [[NSApp mainWindow] setControl:[disableControlSetting boolValue] shared:[disableControlSetting boolValue]];
+	
+	// enable/disable control
+	[[[NSApp mainWindow] firstResponder] setControl:![disableControlSetting boolValue] shared:![disableControlSetting boolValue]];
 }
 
 @end
