@@ -1,0 +1,16 @@
+# Screen Sharing Plugin #
+
+Uses [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) because, well I don't know of anyway to inject this code otherwise. If you have a better idea, let me know, I would love try it.
+
+## Installation ##
+
+1. Install [SIMBL for Snow Leopard](http://www.culater.net/software/SIMBL/SIMBL.php)
+2. Open Xcode project file
+3. Build for Release (ends up in the project directory under `/build/Release/`)
+4. Move `Screen Sharing Plugin.bundle` to `~/Library/Application Support/SIMBL/Plugins/`
+5. Start/Restart `Screen Sharing.app`
+6. Toggle disabling in the `Advanced` menu
+
+## Thanks ##
+
+Thanks goes to [Daniel Bergey](http://www.danielbergey.com/) and [F-Script](http://www.fscript.org/) for making this hack possible to discover.
