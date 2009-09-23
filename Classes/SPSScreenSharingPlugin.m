@@ -9,6 +9,7 @@
 #import "SPSScreenSharingPlugin.h"
 
 #define DisableControlTag 54321
+#define ShowBonjourBrowserTag 54322
 
 @implementation SPSScreenSharingPlugin
 
@@ -48,11 +49,19 @@
 	[newItem setAction:@selector(toggleControlSetting:)];
 	[newMenu addItem:newItem];
 	[newItem release];
+	
+	newItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Show Bonjour Browser" action:NULL keyEquivalent:@""];
+	[newItem setTag:ShowBonjourBrowserTag];
+	[newItem setTarget:[SPSScreenSharingPlugin sharedInstance]];
+	[newItem setAction:@selector(toggleBonjourBrowserSetting:)];
+	[newMenu addItem:newItem];
+	[newItem release];
 }
 
 - (void) dealloc
 {
 	[disableControlSetting release];
+	[showBonjourBrowserSetting release];
 	[super dealloc];
 }
 
@@ -61,6 +70,9 @@
 	NSInteger tag = [item tag];
 	if (tag == DisableControlTag) {
 		[item setState:([disableControlSetting boolValue]) ? NSOnState : NSOffState];
+		return YES;
+	} else if (tag == ShowBonjourBrowserTag) {
+		[item setTitle:([showBonjourBrowserSetting boolValue]) ? @"Hide Bonjour Browser" : @"Show Bonjour Browser"];
 		return YES;
 	} else {
 		return YES;
@@ -73,6 +85,14 @@
 	
 	// enable/disable control
 	[[[NSApp mainWindow] firstResponder] setControl:![disableControlSetting boolValue] shared:![disableControlSetting boolValue]];
+}
+
+- (void)toggleBonjourBrowserSetting:(id)sender
+{
+	showBonjourBrowserSetting = ([showBonjourBrowserSetting boolValue]) ? [NSNumber numberWithBool:NO] : [NSNumber numberWithBool:YES];
+	
+	// FIXME: show/hide window
+	[[[NSApplication sharedApplication] delegate] showBonjourBrowser:[showBonjourBrowserSetting boolValue]];
 }
 
 @end

@@ -12,11 +12,13 @@
 @interface SPSScreenSharingPlugin : NSObject
 {
 	NSNumber* disableControlSetting;
+	NSNumber* showBonjourBrowserSetting;
 }
 
 @property(copy, readwrite) NSNumber* disableControlSetting;
 
 + (SPSScreenSharingPlugin*)sharedInstance;
 - (void)toggleControlSetting:(id)sender;
+- (void)toggleBonjourBrowserSetting:(id)sender;
 
 @end
