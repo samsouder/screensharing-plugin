@@ -2,6 +2,8 @@
 
 Uses [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) because, well I don't know of anyway to inject this code otherwise. If you have a better idea, let me know, I would love try it.
 
+*WARNING: The fullscreen menu item is not accessible after you get into the fullscreen mode, so I suggest setting a keyboard shortcut in System Preferences for it. I tried to bind a key to it in the code, but it's not working for some reason. YE BE WARNED!*
+
 ## Installation ##
 
 - Install [SIMBL for Snow Leopard](http://www.culater.net/software/SIMBL/SIMBL.php)
@@ -16,7 +18,7 @@ Uses [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) because, well I do
 
 - Move `Screen Sharing Plugin.bundle` to `~/Library/Application Support/SIMBL/Plugins/`
 - Start/Restart `Screen Sharing.app`
-- Toggle disabling in the `Advanced` menu
+- Toggle items in the `Advanced` menu
 
 ## Thanks ##
 
