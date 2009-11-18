@@ -13,7 +13,7 @@ Uses [SIMBL](http://www.culater.net/software/SIMBL/SIMBL.php) because, well I do
 
   **OR**
 
-- Download [pre-built bundle ](http://cloud.github.com/downloads/samsouder/screensharing-plugin/Screen_Sharing_Plugin.bundle.zip)
+- Download [pre-built bundle ](http://cloud.github.com/downloads/samsouder/screensharing-plugin/Screen_Sharing_Plugin_v1.1.bundle.zip)
 
 
 - Move `Screen Sharing Plugin.bundle` to `~/Library/Application Support/SIMBL/Plugins/`
