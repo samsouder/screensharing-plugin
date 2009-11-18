@@ -51,7 +51,7 @@
 	[newMenu addItem:newItem];
 	[newItem release];
 	
-	newItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Enter Fullscreen" action:NULL keyEquivalent:@"O"];
+	newItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Enter Fullscreen" action:NULL keyEquivalent:@""];
 	[newItem setTag:FullScreenTag];
 	[newItem setTarget:[SPSScreenSharingPlugin sharedInstance]];
 	[newItem setAction:@selector(toggleFullScreenSetting:)];
@@ -73,7 +73,6 @@
 		return YES;
 	} else if (tag == FullScreenTag) {
 		[item setState:([fullScreenSetting boolValue]) ? NSOnState : NSOffState];
-		[item setKeyEquivalentModifierMask:NSCommandKeyMask];
 		return YES;
 	} else {
 		return YES;
