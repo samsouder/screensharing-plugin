@@ -8,15 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface SPSScreenSharingPlugin : NSObject
 {
 	NSNumber* disableControlSetting;
+	NSNumber* fullScreenSetting;
 }
 
 @property(copy, readwrite) NSNumber* disableControlSetting;
+@property(copy, readwrite) NSNumber* fullScreenSetting;
 
 + (SPSScreenSharingPlugin*)sharedInstance;
 - (void)toggleControlSetting:(id)sender;
+- (void)toggleFullScreenSetting:(id)sender;
 
 @end

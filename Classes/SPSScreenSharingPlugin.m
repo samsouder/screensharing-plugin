@@ -8,11 +8,12 @@
 
 #import "SPSScreenSharingPlugin.h"
 
-#define DisableControlTag 54321
+#define DisableControlTag 1
+#define FullScreenTag 2
 
 @implementation SPSScreenSharingPlugin
 
-@synthesize disableControlSetting;
+@synthesize disableControlSetting, fullScreenSetting;
 
 + (SPSScreenSharingPlugin*)sharedInstance
 {
@@ -29,6 +30,7 @@
 	SPSScreenSharingPlugin* plugin = [SPSScreenSharingPlugin sharedInstance];
 	
 	plugin.disableControlSetting = [NSNumber numberWithBool:NO];
+	plugin.fullScreenSetting = [NSNumber numberWithBool:NO];
 	
 	NSMenu *newMenu;
 	NSMenuItem *newItem;
@@ -48,9 +50,16 @@
 	[newItem setAction:@selector(toggleControlSetting:)];
 	[newMenu addItem:newItem];
 	[newItem release];
+	
+	newItem = [[NSMenuItem allocWithZone:[NSMenu menuZone]] initWithTitle:@"Enter Fullscreen" action:NULL keyEquivalent:@"O"];
+	[newItem setTag:FullScreenTag];
+	[newItem setTarget:[SPSScreenSharingPlugin sharedInstance]];
+	[newItem setAction:@selector(toggleFullScreenSetting:)];
+	[newMenu addItem:newItem];
+	[newItem release];
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	[disableControlSetting release];
 	[super dealloc];
@@ -62,6 +71,10 @@
 	if (tag == DisableControlTag) {
 		[item setState:([disableControlSetting boolValue]) ? NSOnState : NSOffState];
 		return YES;
+	} else if (tag == FullScreenTag) {
+		[item setState:([fullScreenSetting boolValue]) ? NSOnState : NSOffState];
+		[item setKeyEquivalentModifierMask:NSCommandKeyMask];
+		return YES;
 	} else {
 		return YES;
 	}
@@ -72,7 +85,22 @@
 	disableControlSetting = ([disableControlSetting boolValue]) ? [NSNumber numberWithBool:NO] : [NSNumber numberWithBool:YES];
 	
 	// enable/disable control
+	// RFBImageView
 	[[[NSApp mainWindow] firstResponder] setControl:![disableControlSetting boolValue] shared:![disableControlSetting boolValue]];
+}
+
+- (void)toggleFullScreenSetting:(id)sender
+{
+	fullScreenSetting = ([fullScreenSetting boolValue]) ? [NSNumber numberWithBool:NO] : [NSNumber numberWithBool:YES];
+	
+	// go fullscreen or exit fullscreen
+	if ([fullScreenSetting boolValue]) {
+		// RFBImageView > RDNotificationWindow > RFBSessionController
+		[[[[[NSApp mainWindow] firstResponder] window] delegate] enterFullScreen];
+	} else {
+		[[[[[NSApp mainWindow] firstResponder] window] delegate] enterWindowed];
+		[[[[[NSApp mainWindow] firstResponder] window] delegate] exitFullScreen];
+	}
 }
 
 @end
